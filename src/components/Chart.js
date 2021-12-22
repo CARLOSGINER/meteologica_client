@@ -26,6 +26,7 @@ function App({getLastTemp,getLastPower}) {
         });
         socket.on("disconnect", () => {
             setOnLight(false);
+            socket.disconnect()
           });
     }, []);
 
