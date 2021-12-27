@@ -6,12 +6,12 @@ import createPlotlyComponent from 'react-plotly.js/factory';
 const Plot = createPlotlyComponent(Plotly);
 
 // <> para recibir del servidor en vivo de heroku, descomentar linea siguiente:
-// const ENDPOINT = "https://meteologica-app-server.herokuapp.com"
+const ENDPOINT = "https://meteologica-app-server.herokuapp.com"
 
 // <> para probar localmente, descomentar linea siguiente:
 //tambien es necesario copiar la misma dirección en el package.json, como un key despues de scripts:
 //"proxy": "http://127.0.0.1:4001"
-const ENDPOINT = "http://127.0.0.1:4001";
+// const ENDPOINT = "http://127.0.0.1:4001";
 
 const globalColor = '#111d2b'
 
