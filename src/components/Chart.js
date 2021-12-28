@@ -6,11 +6,10 @@ import createPlotlyComponent from 'react-plotly.js/factory';
 const Plot = createPlotlyComponent(Plotly);
 
 // <> para recibir del servidor en vivo de heroku, descomentar linea siguiente:
-const ENDPOINT = "https://meteologica-app-server.herokuapp.com/socket.io/?EIO=4&transport=websocket"
+const ENDPOINT = "https://meteologica-app-server.herokuapp.com/"
 
 // <> para probar localmente, descomentar linea siguiente:
-//tambien es necesario copiar la misma dirección en el package.json, como un key despues de scripts:
-//"proxy": "http://127.0.0.1:4001"
+// <> tambien es necesario copiar la misma dirección en el package.json, como un key despues de scripts: "proxy": "http://127.0.0.1:4001"
 // const ENDPOINT = "http://127.0.0.1:4001";
 
 const globalColor = '#111d2b'
@@ -70,7 +69,12 @@ export default function Chart({getLastTemp,getLastPower}) {
     //finalmente en el evento "disconnect" cambia el estado de onLight, que hace de luz testigo y aplica estilos en el UI
     // (verde, recibiendo datos. O desconectado, rojo)
     useEffect(() => {
-        const socket = socketIOClient(ENDPOINT)
+        const socket = socketIOClient(ENDPOINT,{
+            "force new connection": true,
+            reconnectionAttempts: "Infinity",
+            transports: ["websocket"],
+            autoConnect:true
+        })
 
         socket.on("connect", () => {
             console.log('Socket connected: ',socket.connected); 

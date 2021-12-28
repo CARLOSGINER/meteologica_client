@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://meteologica-app-server.herokuapp.com/socket.io/?EIO=4&transport=websocket",
+  "proxy": "https://meteologica-app-server.herokuapp.com/",
   "eslintConfig": {
     "extends": [
       "react-app",
