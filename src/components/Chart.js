@@ -6,7 +6,7 @@ import createPlotlyComponent from 'react-plotly.js/factory';
 const Plot = createPlotlyComponent(Plotly);
 
 // <> para recibir del servidor en vivo de heroku, descomentar linea siguiente:
-// const ENDPOINT = "https://meteologica-app-server.herokuapp.com"
+const ENDPOINT = "https://meteologica-app-server.herokuapp.com/socket.io/?EIO=4&transport=websocket"
 
 // <> para probar localmente, descomentar linea siguiente:
 //tambien es necesario copiar la misma dirección en el package.json, como un key despues de scripts:
@@ -70,7 +70,7 @@ export default function Chart({getLastTemp,getLastPower}) {
     //finalmente en el evento "disconnect" cambia el estado de onLight, que hace de luz testigo y aplica estilos en el UI
     // (verde, recibiendo datos. O desconectado, rojo)
     useEffect(() => {
-        const socket = socketIOClient()
+        const socket = socketIOClient(ENDPOINT)
 
         socket.on("connect", () => {
             console.log('Socket connected: ',socket.connected); 
@@ -87,7 +87,6 @@ export default function Chart({getLastTemp,getLastPower}) {
             setOnLight(false);
         });
 
-        return ()=>socket.disconnect();
     }, []);
 
     //useEffect para llamar los métodos provistos por el padre App para leer la temp y pot. mas recientes. Tambien se redeondea a dos decimales
